@@ -316,26 +316,26 @@
         const playlist = [
             {
                 title: 'La Noche Mas Linda Del Mundo',
-                artist: 'Artist 1',
+                artist: 'Adalberto Santiago',
                 cover: 'noche mas lindda.jpeg',
-                audio: './noche mas lindda.mp3'
+                audio: './la noche mas linda del mundo.mp3'
             },
             {
                 title: 'Enamorado Tuyo',
                 artist: 'El Cuarteto de Nos',
-                cover: '',
+                cover: 'emaorado tuyo.jpeg',
                 audio: './Enamorado tuyo - El Cuarteto de Nos.mp3'
             },
             {
                 title: 'La Vuelta Al Mundo',
                 artist: 'Calle 13',
-                cover: '',
+                cover: 'vuelta al.jpeg',
                 audio: './La Vuelta Al Mundo - Calle 13.mp3'
             },
             {
                 title: '24K Magic',
                 artist: 'Bruno Mars',
-                cover: '',
+                cover: '24 k.jpeg',
                 audio: './24K Magic - Bruno Mars.mp3'
             }
         ];
@@ -345,17 +345,14 @@
         }
 
         function playSong(title, artist, cover, audioSrc) {
-            // Debug logs
             console.log('Playing song:', audioSrc);
             
             document.getElementById('songTitle').textContent = title;
             document.getElementById('artistName').textContent = artist;
             playerCover.src = cover;
             
-            // Update audio source and play
             audioPlayer.src = audioSrc;
             
-            // Promise-based play with error handling
             audioPlayer.play()
                 .then(() => {
                     console.log('Audio playback started successfully');
@@ -367,7 +364,6 @@
                     alert('Error playing audio: ' + error.message);
                 });
 
-            // Find current song index in playlist
             currentSongIndex = playlist.findIndex(song => song.title === title);
         }
 
@@ -399,12 +395,10 @@
             playSong(song.title, song.artist, song.cover, song.audio);
         }
 
-        // Event listeners for audio debugging
         audioPlayer.addEventListener('loadstart', () => console.log('Audio loading started'));
         audioPlayer.addEventListener('loadeddata', () => console.log('Audio data loaded'));
         audioPlayer.addEventListener('error', (e) => console.error('Audio error:', audioPlayer.error));
 
-        // Update progress bar
         audioPlayer.addEventListener('timeupdate', () => {
             if (audioPlayer.duration) {
                 const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
@@ -412,7 +406,6 @@
             }
         });
 
-        // Click on progress bar to seek
         progressBarContainer.addEventListener('click', (e) => {
             const rect = progressBarContainer.getBoundingClientRect();
             const percentage = (e.clientX - rect.left) / rect.width;
@@ -421,12 +414,10 @@
             }
         });
 
-        // Volume control
         volumeSlider.addEventListener('input', (e) => {
             audioPlayer.volume = e.target.value / 100;
         });
 
-        // Auto play next song when current one ends
         audioPlayer.addEventListener('ended', () => {
             nextSong();
         });
