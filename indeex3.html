@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de Artistas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #1f1f1f;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ececec;
+        }
+
+        .artist-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .artist-card {
+            background-color: rgba(168, 168, 168, 0.486);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s;
+        }
+
+        .artist-card:hover {
+            transform: scale(1.05);
+            background-color: #000;
+            color: #fff;
+            transition: 0.5s;
+        }
+
+        .artist-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #0873bb;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+        .buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .button:hover::before {
+            transform: translateX(0);
+        }
+
+        .music-library {
+            background: linear-gradient(45deg, #e66bff, #ff8eec);
+        }
+        
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .button:active {
+            transform: translateY(-1px);
+        }
+
+        .icon {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="artist-container">
+
+        <!-- Bruno Mars -->
+        <div class="artist-card">
+            <img src="bruno.jpg" alt="Bruno Mars">
+            <h2>Bruno Mars</h2>
+            <p>Bruno Mars es un cantante, compositor y productor estadounidense conocido por su estilo versátil que mezcla pop, R&B, funk, soul y reggae. Ha lanzado éxitos como "Just the Way You Are" y "Uptown Funk".</p>
+        </div>
+
+        <!-- Taylor Swift -->
+        <div class="artist-card">
+            <img src="tawyl.png" alt="Taylor Swift">
+            <h2>Taylor Swift</h2>
+            <p>Taylor Swift es una de las artistas más influyentes del mundo, comenzando su carrera en el country y luego evolucionando al pop y folk. Sus álbumes incluyen éxitos como "Love Story", "Shake It Off", y "Folklore".</p>
+        </div>
+
+        <!-- Calle 13 -->
+        <div class="artist-card">
+            <img src="residente.webp" alt="Calle 13">
+            <h2>Calle 13</h2>
+            <p>Calle 13 es una banda de rap fusión de Puerto Rico liderada por Residente y Visitante. Su música se caracteriza por letras de contenido político y social, destacando canciones como "Atrévete-te-te" y "Latinoamérica".</p>
+        </div>
+
+        <!-- Cuarteto de Nos -->
+        <div class="artist-card">
+            <img src="cuarateto.jpeg" alt="Cuarteto de Nos">
+            <h2>Cuarteto de Nos</h2>
+            <p>El Cuarteto de Nos es una banda de rock alternativo de Uruguay. Su estilo único incluye humor, ironía y letras críticas, con canciones icónicas como "Yendo a la casa de Damián" y "El Hijo de Hernández".</p>
+        </div>
+
+        <!-- Adalberto Santiago -->
+        <div class="artist-card">
+            <img src="adalberto santiago.jpg" alt="Adalberto Santiago">
+            <h2>Adalberto Santiago</h2>
+            <p>Adalberto Santiago es un cantante de salsa puertorriqueño que ha sido una figura prominente en la música latina. Fue vocalista principal de las Estrellas de Fania y ha interpretado éxitos como "La Noche Más Linda del Mundo".</p>
+        </div>
+
+    </div>
+    <div class="buttons">
+        <a href="index1.html" class="button music-library">
+            <span class="icon">♣️</span>
+            Regresar
+        </a>
+        </div>
+</body>
+</html>
