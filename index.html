@@ -3,34 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maosic</title>
+    <title>Welcome to MusicHub</title>
     <style>
-          * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
 
         body {
-            background-color: #0a0a0a;
-            color: white;
             min-height: 100vh;
-        }
-
-        nav {
-            padding: 1rem;
-            display: flex;
-            gap: 2rem;
-            background: rgba(255,255,255,0.1);
-        }
-
-        nav a {
+            background: linear-gradient(135deg, #1e2024, #23272b);
             color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            overflow-x: hidden;
         }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 8s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .welcome-text {
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
         .buttons {
             display: flex;
             gap: 1.5rem;
@@ -71,9 +142,17 @@
         }
 
         .music-library {
-            background: linear-gradient(45deg, #fffd6b, #9f8eff);
+            background: linear-gradient(45deg, #ff6b6b, #ac8eff);
         }
-        
+
+        .artists-info {
+            background: linear-gradient(45deg, #4ecdc4, #8bb745);
+        }
+
+        .genres {
+            background: linear-gradient(45deg, #a537fd, #1fddff);
+        }
+
         .button:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -102,410 +181,69 @@
                 justify-content: center;
             }
         }
-        .hero {
-            min-height: 60vh;
-            padding: 2rem;
-            background: linear-gradient(45deg, #a736a1, #e495e0);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .play-btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .album-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            padding: 2rem;
-        }
-
-        .album-card {
-            background: rgba(255,255,255,0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .album-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .album-card img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-
-        .music-player {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 300px;
-            background: rgba(28, 28, 28, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            display: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .music-player.active {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .player-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-
-        .song-info {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .song-info img {
-            width: 48px;
-            height: 48px;
-            border-radius: 6px;
-            object-fit: cover;
-        }
-
-        .song-details h3 {
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .song-details p {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .close-button {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.7);
-            cursor: pointer;
-            font-size: 20px;
-            padding: 4px;
-            line-height: 1;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            margin: 16px 0;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .progress {
-            width: 30%;
-            height: 100%;
-            background: #fff;
-            border-radius: 2px;
-            transition: width 0.1s linear;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 24px;
-            margin: 16px 0;
-        }
-
-        .control-btn {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .control-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .play-pause {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .volume-slider {
-            flex: 1;
-            height: 4px;
-            -webkit-appearance: none;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            outline: none;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #fff;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
     </style>
 </head>
 <body>
-    <div class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Hola, Bienvenido</h1>
-            </div>
-        </div>
-    </div>
-
-    <div class="album-grid">
-        <div class="album-card" onclick="playSong('La Noche Mas Linda Del Mundo', 'Adalberto Santiago', 'noche mas lindda.jpeg', './la noche mas linda del mundo.mp3')">
-            <img src="noche mas lindda.jpeg" alt="La Noche Mas Linda Del Mundo">
-            <h3>La Noche Mas Linda Del Mundo</h3>
-        </div>
-        <div class="album-card" onclick="playSong('Enamorado Tuyo', 'El Cuarteto de Nos', 'emaorado tuyo.jpeg', './Enamorado tuyo - El Cuarteto de Nos.mp3')">
-            <img src="emaorado tuyo.jpeg" alt="Enamorado Tuyo">
-            <h3>Enamorado Tuyo</h3>
-        </div>
-        <div class="album-card" onclick="playSong('La Vuelta Al Mundo', 'Calle 13', 'vuelta al.jpeg', './La Vuelta Al Mundo - Calle 13.mp3')">
-            <img src="vuelta al.jpeg" alt="La Vuelta Al Mundo">
-            <h3>La Vuelta Al Mundo</h3>
-        </div>
-        <div class="album-card" onclick="playSong('24K Magic', 'Bruno Mars', '24 k.jpeg', './24K Magic - Bruno Mars.mp3')">
-            <img src="24 k.jpeg" alt="24K Magic">
-            <h3>24K Magic</h3>
-        </div>
-        <div class="album-card" onclick="playSong('Blank Space', 'Taylor Swift', 'taylor blav.jpeg', './tay (online-audio-converter.com).mp3')">
-            <img src="taylor blav.jpeg" alt="24K Magic">
-            <h3>Blank Space</h3>
-        </div>
-    </div>
-
-    <div class="music-player" id="musicPlayer">
-        <div class="player-header">
-            <div class="song-info">
-                <img id="playerCover" src="/api/placeholder/48/48" alt="Album Cover">
-                <div class="song-details">
-                    <h3 id="songTitle">Title</h3>
-                    <p id="artistName">Artist</p>
-                </div>
-            </div>
-            <button class="close-button" onclick="togglePlayer()">×</button>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="welcome-text">
+            <h1>Bienvenido a Maosic</h1>
+            <p>Descubre Nueva Musica En Esta Pagina Creada Por Mi.</p>
         </div>
         
-        <div class="progress-bar" id="progressBarContainer">
-            <div class="progress" id="progress"></div>
-        </div>
-
-        <div class="controls">
-            <button class="control-btn" onclick="previousSong()">←</button>
-            <button class="control-btn play-pause" onclick="togglePlay()" id="playPauseBtn">▹</button>
-            <button class="control-btn" onclick="nextSong()">→</button>
-        </div>
-
-        <div class="volume-control">
-            <span>◊</span>
-            <input type="range" class="volume-slider" min="0" max="100" value="100" id="volumeSlider">
+        <div class="buttons">
+            <a href="index.html" class="button music-library">
+                <span class="icon">🎵</span>
+                Playlist
+            </a>
+            <a href="indeex3.html" class="button artists-info">
+                <span class="icon">🎤</span>
+                Informacion de Artistas
+            </a>
+            <a href="index4.html" class="button genres">
+                <span class="icon">🎧</span>
+                Busca por Genero
+            </a>
         </div>
     </div>
-
-    <audio id="audioPlayer"></audio>
 
     <script>
-        const musicPlayer = document.getElementById('musicPlayer');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const progress = document.getElementById('progress');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const audioPlayer = document.getElementById('audioPlayer');
-        const progressBarContainer = document.getElementById('progressBarContainer');
-        const playerCover = document.getElementById('playerCover');
-        
-        let currentSongIndex = 0;
-        const playlist = [
-            {
-                title: 'La Noche Mas Linda Del Mundo',
-                artist: 'Adalberto Santiago',
-                cover: 'noche mas lindda.jpeg',
-                audio: './la noche mas linda del mundo.mp3'
-            },
-            {
-                title: 'Enamorado Tuyo',
-                artist: 'El Cuarteto de Nos',
-                cover: 'emaorado tuyo.jpeg',
-                audio: './Enamorado tuyo - El Cuarteto de Nos.mp3'
-            },
-            {
-                title: 'La Vuelta Al Mundo',
-                artist: 'Calle 13',
-                cover: 'vuelta al.jpeg',
-                audio: './La Vuelta Al Mundo - Calle 13.mp3'
-            },
-            {
-                title: '24K Magic',
-                artist: 'Bruno Mars',
-                cover: '24 k.jpeg',
-                audio: './24K Magic - Bruno Mars.mp3'
-            },
-            {
-                title: 'Blank Space',
-                artist: 'Taylor Swift',
-                cover: 'taylor blav.jpeg',
-                audio: './tay (online-audio-converter.com).mp3'
-            }
-        ];
+        // Create floating particles effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numberOfParticles = 50;
 
-        function togglePlayer() {
-            musicPlayer.classList.toggle('active');
-        }
-
-        function playSong(title, artist, cover, audioSrc) {
-            console.log('Playing song:', audioSrc);
-            
-            document.getElementById('songTitle').textContent = title;
-            document.getElementById('artistName').textContent = artist;
-            playerCover.src = cover;
-            
-            audioPlayer.src = audioSrc;
-            
-            audioPlayer.play()
-                .then(() => {
-                    console.log('Audio playback started successfully');
-                    musicPlayer.classList.add('active');
-                    playPauseBtn.textContent = '❚❚';
-                })
-                .catch(error => {
-                    console.error('Audio playback failed:', error);
-                    alert('Error playing audio: ' + error.message);
-                });
-
-            currentSongIndex = playlist.findIndex(song => song.title === title);
-        }
-
-        function togglePlay() {
-            if (audioPlayer.paused) {
-                audioPlayer.play()
-                    .then(() => {
-                        playPauseBtn.textContent = '❚❚';
-                    })
-                    .catch(error => {
-                        console.error('Play failed:', error);
-                        alert('Error playing audio: ' + error.message);
-                    });
-            } else {
-                audioPlayer.pause();
-                playPauseBtn.textContent = '▹';
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random positioning
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                particlesContainer.appendChild(particle);
             }
         }
 
-        function previousSong() {
-            currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
-            const song = playlist[currentSongIndex];
-            playSong(song.title, song.artist, song.cover, song.audio);
-        }
+        // Initialize particles
+        createParticles();
 
-        function nextSong() {
-            currentSongIndex = (currentSongIndex + 1) % playlist.length;
-            const song = playlist[currentSongIndex];
-            playSong(song.title, song.artist, song.cover, song.audio);
-        }
+        // Recreate particles periodically
+        setInterval(() => {
+            const particles = document.getElementById('particles');
+            particles.innerHTML = '';
+            createParticles();
+        }, 8000);
 
-        audioPlayer.addEventListener('loadstart', () => console.log('Audio loading started'));
-        audioPlayer.addEventListener('loadeddata', () => console.log('Audio data loaded'));
-        audioPlayer.addEventListener('error', (e) => console.error('Audio error:', audioPlayer.error));
-
-        audioPlayer.addEventListener('timeupdate', () => {
-            if (audioPlayer.duration) {
-                const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                progress.style.width = percentage + '%';
-            }
-        });
-
-        progressBarContainer.addEventListener('click', (e) => {
-            const rect = progressBarContainer.getBoundingClientRect();
-            const percentage = (e.clientX - rect.left) / rect.width;
-            if (audioPlayer.duration) {
-                audioPlayer.currentTime = percentage * audioPlayer.duration;
-            }
-        });
-
-        volumeSlider.addEventListener('input', (e) => {
-            audioPlayer.volume = e.target.value / 100;
-        });
-
-        audioPlayer.addEventListener('ended', () => {
-            nextSong();
+        // Add hover sound effect to buttons
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFhoKDgYaBhoGGgoaChoKGgoaChoKGgoaChoKGgoaChoKGgoaChoKGgoaChoKGgoaChoKGgoaChoKGgoaChoKGgoaChoKGgoaChYKGgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgoWChYKFgo=');
+                audio              
+                  audio.play();
+            });
         });
     </script>
-        <div class="buttons">
-            <a href="index1.html" class="button music-library">
-                <span class="icon">♦️</span>
-                Regresar
-            </a>
-            </div>
 </body>
 </html>
